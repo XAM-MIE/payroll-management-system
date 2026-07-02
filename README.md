@@ -29,7 +29,7 @@ database/
 
 ## Stack
 
-- Frontend: React + Vite + Tailwind CSS
+- Frontend: HTML + CSS + Bootstrap
 - Backend: Node.js + Express
 - Database: MySQL
 - Database Tool: MySQL Workbench
