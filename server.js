@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const db = require("./config/db");
 
 const app = express();
 
@@ -36,6 +37,9 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+db.getConnection()
+	.then(() => console.log("MySQL connected successfully"))
+	.catch((err) => console.error("MySQL connection error:", err));
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 });
