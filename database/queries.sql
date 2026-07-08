@@ -288,14 +288,16 @@ ORDER BY employee_name;
 -- 14. Monthly payroll summary report.
 SELECT
     pm.payroll_month,
+    u.full_name AS processed_by,
     COUNT(pr.payroll_run_id) AS total_employees_paid,
     SUM(pr.gross_salary) AS total_gross_salary,
     SUM(pr.total_deductions) AS total_deductions,
     SUM(pr.tax_amount) AS total_tax,
     SUM(pr.net_salary) AS total_net_salary
 FROM payroll_months pm
+LEFT JOIN users u ON pm.processed_by = u.user_id
 JOIN payroll_runs pr ON pm.payroll_month_id = pr.payroll_month_id
-GROUP BY pm.payroll_month
+GROUP BY pm.payroll_month, u.full_name
 ORDER BY pm.payroll_month DESC;
 
 -- 15. Department payroll cost report.
@@ -324,4 +326,3 @@ JOIN departments d ON e.department_id = d.department_id
 JOIN payroll_months pm ON pr.payroll_month_id = pm.payroll_month_id
 WHERE pm.payroll_month = '2026-06'
 ORDER BY pr.net_salary DESC;
-

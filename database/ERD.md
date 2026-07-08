@@ -86,6 +86,7 @@ erDiagram
         INT payroll_month_id PK
         CHAR payroll_month
         ENUM status
+        INT processed_by FK
         TIMESTAMP processed_at
     }
 
@@ -110,6 +111,7 @@ erDiagram
         TIMESTAMP generated_at
     }
 
+    users ||--o{ payroll_months : processes
     departments ||--o{ employees : has
     salary_grades ||--o{ employees : assigned_to
     employees ||--o{ employee_allowances : receives
@@ -144,4 +146,3 @@ tax_amount = gross_salary * tax_rate / 100
 
 net_salary = gross_salary - total_deductions - tax_amount
 ```
-

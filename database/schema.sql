@@ -105,7 +105,11 @@ CREATE TABLE payroll_months (
     payroll_month_id INT AUTO_INCREMENT PRIMARY KEY,
     payroll_month CHAR(7) NOT NULL UNIQUE,
     status ENUM('Open', 'Processed') NOT NULL DEFAULT 'Open',
-    processed_at TIMESTAMP NULL
+    processed_by INT NULL,
+    processed_at TIMESTAMP NULL,
+    CONSTRAINT fk_payroll_months_user
+        FOREIGN KEY (processed_by) REFERENCES users(user_id)
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE payroll_runs (
