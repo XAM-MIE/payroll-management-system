@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Salary - Login</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme.js"></script>
+</head>
+<body class="bg-body-secondary">
+    
+    <div class="container-fluid p-0 overflow-hidden">
+        <div class="row g-0" style="min-height: 100vh;">
+            
+            <!-- Left Side: Image / Branding -->
+            <div class="col-lg-6 d-none d-lg-block position-relative bg-primary">
+                <img src="img/auth-bg.png" alt="Net Salary Background" class="position-absolute w-100 h-100" style="object-fit: cover;">
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(135deg, rgba(111, 78, 55, 0.4) 0%, rgba(62, 39, 35, 0.85) 100%);"></div>
+                <div class="position-absolute bottom-0 start-0 p-5 text-white w-100 z-1" style="backdrop-filter: blur(4px);">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="ph-fill ph-wallet fs-1 me-2 text-primary text-opacity-75"></i>
+                        <h2 class="fw-bold mb-0">Net Salary</h2>
+                    </div>
+                    <p class="lead mb-0 fw-light">Modernizing payroll management with seamless automation and insightful analytics.</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Login Form -->
+            <div class="col-lg-6 d-flex align-items-center justify-content-center bg-body">
+                <main class="form-signin w-100 m-auto px-4" style="max-width: 450px;">
+                    <form>
+                        <div class="text-center mb-5">
+                            <div class="d-inline-block p-3 rounded-circle bg-primary bg-opacity-10 mb-3">
+                                <i class="ph-fill ph-user-circle fs-1 text-primary"></i>
+                            </div>
+                            <h2 class="fw-bold mb-2">Welcome Back</h2>
+                            <p class="text-muted">Please sign in to your account</p>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" value="admin@payroll.com">
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" value="password123">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="rememberMe" checked>
+                                <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="#" class="text-decoration-none small text-primary fw-medium">Forgot password?</a>
+                        </div>
+
+                        <button class="btn btn-primary w-100 py-3 rounded-3 fw-medium shadow-sm mb-4" type="button" onclick="window.location.href='dashboard.html'">
+                            Sign In
+                        </button>
+                        
+                        <div class="text-center">
+                            <p class="text-muted">Don't have an account? <a href="register.html" class="text-primary text-decoration-none fw-medium">Register here</a></p>
+                        </div>
+                    </form>
+                </main>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

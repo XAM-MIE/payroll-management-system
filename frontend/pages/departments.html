@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Salary - Departments</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/theme.js"></script>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-body border-end" id="sidebar-wrapper"
+            style="min-width: 260px; max-width: 260px; min-height: 100vh; z-index: 1000;">
+            <!-- Brand & Workspace Switcher -->
+            <div class="sidebar-heading p-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="bg-primary text-white rounded-2 d-flex align-items-center justify-content-center"
+                        style="width: 32px; height: 32px;">
+                        <i class="ph-bold ph-wallet fs-5"></i>
+                    </div>
+                    <h5 class="m-0 fw-bold fs-5 tracking-tight">Net Salary</h5>
+                </div>
+                <i class="ph-bold ph-caret-up-down text-muted fs-6 cursor-pointer"></i>
+            </div>
+
+            <div class="list-group list-group-flush mt-2 px-3 gap-1">
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-2"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Main Menu</div>
+
+                <a href="../dashboard.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-squares-four fs-5 me-3 text-muted"></i> Dashboard
+                </a>
+                <a href="employees.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-users fs-5 me-3 text-muted"></i> Employees
+                </a>
+                <a href="departments.html"
+                    class="list-group-item list-group-item-action bg-primary bg-opacity-10 text-primary border-0 rounded-3 d-flex align-items-center fw-semibold py-2 px-3 mb-1">
+                    <i class="ph-fill ph-buildings fs-5 me-3"></i> Departments
+                </a>
+                <a href="salary-grades.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-stack fs-5 me-3 text-muted"></i> Salary Grades
+                </a>
+
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-4"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Payroll Setup</div>
+
+                <a href="../404.html?page=allowances"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-plus-circle fs-5 me-3 text-muted"></i> Allowances
+                </a>
+                <a href="../404.html?page=deductions"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-minus-circle fs-5 me-3 text-muted"></i> Deductions
+                </a>
+                <a href="../404.html?page=overtime"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-clock fs-5 me-3 text-muted"></i> Overtime
+                </a>
+
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-4"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Operations</div>
+
+                <a href="../404.html?page=run-payroll"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-calculator fs-5 me-3 text-muted"></i> Run Payroll
+                </a>
+                <a href="../404.html?page=payslips"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-receipt fs-5 me-3 text-muted"></i> Payslips
+                </a>
+                <a href="../404.html?page=reports"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-chart-line-up fs-5 me-3 text-muted"></i> Reports
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100 bg-body-tertiary d-flex flex-column h-100 min-vh-100">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg bg-body border-bottom px-4 py-2 sticky-top" style="height: 72px;">
+                <div class="d-flex align-items-center">
+                    <button
+                        class="btn btn-light me-3 d-flex align-items-center justify-content-center p-2 rounded-3 border-0 bg-body-secondary"
+                        id="menu-toggle">
+                        <i class="ph ph-list fs-5"></i>
+                    </button>
+                    <div class="d-none d-md-flex align-items-center bg-body-secondary rounded-3 px-3 py-2 ms-2"
+                        style="width: 300px;">
+                        <i class="ph ph-magnifying-glass text-muted me-2"></i>
+                        <input type="text" id="globalSearchInput" class="form-control bg-transparent border-0 p-0 shadow-none"
+                            placeholder="Search departments...">
+                    </div>
+                </div>
+
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    <!-- Theme Toggle -->
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center text-body"
+                            id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                            data-bs-display="static" aria-label="Toggle theme (auto)">
+                            <span class="theme-icon-active d-flex align-items-center" id="bd-theme-icon"><i
+                                    class="ph-fill ph-circle-half fs-5"></i></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="bd-theme-text">
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center"
+                                    data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="ph-fill ph-sun me-2 opacity-50"></i> Light
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center"
+                                    data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="ph-fill ph-moon me-2 opacity-50"></i> Dark
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center active"
+                                    data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="ph-fill ph-circle-half me-2 opacity-50"></i> Auto
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2 border-0 shadow-sm"
+                            type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://ui-avatars.com/api/?name=Admin+User&background=6F4E37&color=fff"
+                                class="rounded-circle" width="28" height="28" alt="User">
+                            <span class="fw-medium d-none d-sm-inline">Admin User</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item d-flex align-items-center text-danger" href="../index.html"><i
+                                        class="ph ph-sign-out me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content Container -->
+            <div class="container-fluid p-4 flex-grow-1" id="main-content">
+                <!-- Welcome Section -->
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <h3 class="fw-bold mb-1">Departments Setup</h3>
+                        <p class="text-muted mb-0">Manage organizational departments, assign managers, and view allocation analytics.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary d-flex align-items-center gap-2 rounded-3 px-4 py-2 shadow-sm"
+                            data-bs-toggle="modal" data-bs-target="#addDeptModal">
+                            <i class="ph-bold ph-plus"></i> Add Department
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Summary Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="card border bg-body rounded-4 shadow-sm">
+                            <div class="card-body p-4 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bold mb-1" id="statTotalDepts">0</h3>
+                                    <p class="text-muted small mb-0 fw-medium">Total Departments</p>
+                                </div>
+                                <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-3">
+                                    <i class="ph-bold ph-buildings fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border bg-body rounded-4 shadow-sm">
+                            <div class="card-body p-4 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bold mb-1" id="statAssignedManagers">0</h3>
+                                    <p class="text-muted small mb-0 fw-medium">Assigned Managers</p>
+                                </div>
+                                <div class="p-3 bg-success bg-opacity-10 text-success rounded-3">
+                                    <i class="ph-bold ph-user-check fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Filters -->
+                <div class="card border bg-body rounded-4 shadow-sm mb-4">
+                    <div class="card-body p-3">
+                        <div class="row g-3">
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="ph ph-magnifying-glass"></i></span>
+                                    <input type="text" id="searchFilter" class="form-control border-start-0" placeholder="Search by department name or manager...">
+                                </div>
+                            </div>
+                            <div class="col-md-2 d-grid">
+                                <button class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2" id="resetFiltersBtn">
+                                    <i class="ph ph-arrows-counter-clockwise"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Directory Table Card -->
+                <div class="card shadow-sm border bg-body rounded-4">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr class="text-muted small text-uppercase" style="font-size: 0.75rem;">
+                                        <th class="fw-semibold px-4 py-3 border-0">Department ID</th>
+                                        <th class="fw-semibold py-3 border-0">Department Name</th>
+                                        <th class="fw-semibold py-3 border-0">Manager Name</th>
+                                        <th class="fw-semibold py-3 border-0">Staff Count</th>
+                                        <th class="fw-semibold px-4 py-3 border-0 text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="border-top-0" id="deptTableBody">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Department Modal -->
+    <div class="modal fade" id="addDeptModal" tabindex="-1" aria-labelledby="addDeptModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white border-0 py-3 px-4">
+                    <h5 class="modal-title fw-bold" id="addDeptModalLabel">Add Department</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="addDeptForm">
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="deptName" class="form-label fw-medium">Department Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="deptName" required placeholder="e.g. Operations">
+                            </div>
+                            <div class="col-12">
+                                <label for="managerName" class="form-label fw-medium">Manager Name</label>
+                                <input type="text" class="form-control" id="managerName" placeholder="e.g. Amina Yusuf">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 px-4 pb-4">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 shadow-sm">Save Department</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Department Modal -->
+    <div class="modal fade" id="editDeptModal" tabindex="-1" aria-labelledby="editDeptModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white border-0 py-3 px-4">
+                    <h5 class="modal-title fw-bold" id="editDeptModalLabel">Edit Department</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editDeptForm">
+                    <input type="hidden" id="editDeptId">
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="editDeptName" class="form-label fw-medium">Department Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="editDeptName" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="editManagerName" class="form-label fw-medium">Manager Name</label>
+                                <input type="text" class="form-control" id="editManagerName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 px-4 pb-4">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 shadow-sm">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal (Required: Confirmation Popup) -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-body p-4 text-center">
+                    <div class="text-danger mb-3">
+                        <i class="ph-fill ph-warning-octagon fs-1"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Delete Department?</h5>
+                    <p class="text-muted small mb-4">Are you sure you want to delete <span class="fw-semibold text-body" id="deleteDeptName">Department</span>? Employees linked to this department will remain but will require updating.</p>
+                    <input type="hidden" id="deleteDeptId">
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button type="button" class="btn btn-light rounded-pill px-4 flex-grow-1" data-bs-dismiss="modal">No, Keep</button>
+                        <button type="button" class="btn btn-danger rounded-pill px-4 flex-grow-1" id="confirmDeleteBtn">Yes, Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+    
+    <script>
+        const defaultDepts = [
+            { id: 1, name: 'Human Resources', manager: 'Amina Yusuf' },
+            { id: 2, name: 'Finance', manager: 'Tunde Bello' },
+            { id: 3, name: 'Information Technology', manager: 'David Mensah' },
+            { id: 4, name: 'Operations', manager: 'Chioma Okafor' },
+            { id: 5, name: 'Sales', manager: 'Ibrahim Musa' }
+        ];
+
+        // Ensure keys exist in localStorage
+        if (!localStorage.getItem('departments')) localStorage.setItem('departments', JSON.stringify(defaultDepts));
+        
+        function getDepartments() { return JSON.parse(localStorage.getItem('departments')); }
+        function saveDepartments(data) { localStorage.setItem('departments', JSON.stringify(data)); }
+        function getEmployees() { return JSON.parse(localStorage.getItem('employees')) || []; }
+
+        function calculateStats() {
+            const list = getDepartments();
+            document.getElementById('statTotalDepts').innerText = list.length;
+            document.getElementById('statAssignedManagers').innerText = list.filter(d => d.manager && d.manager.trim() !== '').length;
+        }
+
+        function renderDepartments() {
+            const depts = getDepartments();
+            const emps = getEmployees();
+            
+            const searchVal = document.getElementById('searchFilter').value.toLowerCase();
+            const globalSearchVal = document.getElementById('globalSearchInput').value.toLowerCase();
+            
+            const tbody = document.getElementById('deptTableBody');
+            tbody.innerHTML = '';
+
+            const filtered = depts.filter(d => {
+                const matchesSearch = d.name.toLowerCase().includes(searchVal) || (d.manager && d.manager.toLowerCase().includes(searchVal));
+                const matchesGlobalSearch = d.name.toLowerCase().includes(globalSearchVal) || (d.manager && d.manager.toLowerCase().includes(globalSearchVal));
+                return matchesSearch && matchesGlobalSearch;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-5 text-muted">No departments found.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(d => {
+                const staffCount = emps.filter(e => e.departmentId == d.id).length;
+                
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="px-4 fw-semibold">DEP${String(d.id).padStart(3, '0')}</td>
+                        <td class="fw-bold">${d.name}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                ${d.manager ? `<img src="https://ui-avatars.com/api/?name=${d.manager}&background=FAF9F6&color=3E2723" class="rounded-circle me-2" width="24" height="24">
+                                <span class="fw-medium">${d.manager}</span>` : '<span class="text-muted small">Not Assigned</span>'}
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge bg-gold-subtle text-gold border border-gold border-opacity-25 px-3 py-1 rounded-pill fw-semibold">${staffCount} Staff</span>
+                        </td>
+                        <td class="px-4 text-end">
+                            <button class="btn btn-sm btn-light border p-1 rounded-2 cursor-pointer me-1" onclick="openEditModal(${d.id})" title="Edit Department">
+                                <i class="ph ph-pencil fs-5"></i>
+                            </button>
+                            <button class="btn btn-sm btn-light border p-1 rounded-2 cursor-pointer text-danger" onclick="openDeleteModal(${d.id}, '${d.name}')" title="Delete Department">
+                                <i class="ph ph-trash fs-5"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // CRUD Event listeners
+        document.getElementById('addDeptForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const depts = getDepartments();
+            const nextId = depts.reduce((max, dept) => dept.id > max ? dept.id : max, 0) + 1;
+
+            const nameInput = document.getElementById('deptName').value.trim();
+            const managerInput = document.getElementById('managerName').value.trim();
+
+            // Name uniqueness validation
+            if (depts.some(d => d.name.toLowerCase() === nameInput.toLowerCase())) {
+                alert("Department name already exists!");
+                return;
+            }
+
+            const newDept = {
+                id: nextId,
+                name: nameInput,
+                manager: managerInput
+            };
+
+            depts.push(newDept);
+            saveDepartments(depts);
+
+            const addModal = bootstrap.Modal.getInstance(document.getElementById('addDeptModal'));
+            addModal.hide();
+            document.getElementById('addDeptForm').reset();
+
+            calculateStats();
+            renderDepartments();
+        });
+
+        function openEditModal(id) {
+            const depts = getDepartments();
+            const dept = depts.find(d => d.id == id);
+            if (!dept) return;
+
+            document.getElementById('editDeptId').value = dept.id;
+            document.getElementById('editDeptName').value = dept.name;
+            document.getElementById('editManagerName').value = dept.manager || '';
+
+            const editModal = new bootstrap.Modal(document.getElementById('editDeptModal'));
+            editModal.show();
+        }
+
+        document.getElementById('editDeptForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const depts = getDepartments();
+            const id = parseInt(document.getElementById('editDeptId').value);
+
+            const index = depts.findIndex(d => d.id === id);
+            if (index !== -1) {
+                const nameInput = document.getElementById('editDeptName').value.trim();
+                const managerInput = document.getElementById('editManagerName').value.trim();
+
+                // Name uniqueness validation (excluding self)
+                if (depts.some(d => d.id !== id && d.name.toLowerCase() === nameInput.toLowerCase())) {
+                    alert("Department name already exists!");
+                    return;
+                }
+
+                depts[index].name = nameInput;
+                depts[index].manager = managerInput;
+
+                saveDepartments(depts);
+
+                const editModal = bootstrap.Modal.getInstance(document.getElementById('editDeptModal'));
+                editModal.hide();
+
+                calculateStats();
+                renderDepartments();
+            }
+        });
+
+        function openDeleteModal(id, name) {
+            document.getElementById('deleteDeptId').value = id;
+            document.getElementById('deleteDeptName').innerText = name;
+
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            deleteModal.show();
+        }
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
+            const id = parseInt(document.getElementById('deleteDeptId').value);
+            let depts = getDepartments();
+            depts = depts.filter(d => d.id !== id);
+            saveDepartments(depts);
+
+            const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+            deleteModal.hide();
+
+            calculateStats();
+            renderDepartments();
+        });
+
+        // Search & Filter listeners
+        document.getElementById('searchFilter').addEventListener('input', renderDepartments);
+        document.getElementById('globalSearchInput').addEventListener('input', renderDepartments);
+
+        document.getElementById('resetFiltersBtn').addEventListener('click', function () {
+            document.getElementById('searchFilter').value = '';
+            document.getElementById('globalSearchInput').value = '';
+            renderDepartments();
+        });
+
+        // Initialize view
+        window.addEventListener('DOMContentLoaded', () => {
+            calculateStats();
+            renderDepartments();
+        });
+    </script>
+</body>
+
+</html>

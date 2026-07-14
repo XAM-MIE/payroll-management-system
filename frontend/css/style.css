@@ -1,0 +1,388 @@
+/* =========================================================
+   Net Salary — Premium Brown, Gold & White Design System
+   Bootstrap 5.3 CSS Variable Overrides
+   ========================================================= */
+
+/* ---------- Palette Tokens ---------- */
+:root {
+    /* Core palette */
+    --ns-brown:        #6F4E37;
+    --ns-brown-rgb:    111, 78, 55;
+    --ns-brown-dark:   #5A3E2B;
+    --ns-brown-darker: #3E2723;
+    --ns-brown-light:  #8B6B50;
+    --ns-gold:         #C9A227;
+    --ns-gold-rgb:     201, 162, 39;
+    --ns-gold-light:   #D4B44A;
+    --ns-gold-dark:    #A88820;
+    --ns-off-white:    #FAF9F6;
+    --ns-white:        #FFFFFF;
+    --ns-beige:        #E8E0D5;
+    --ns-beige-light:  #F3EDE4;
+    --ns-text:         #3E2723;
+    --ns-text-muted:   #7A6B63;
+
+    /* Semantic colors */
+    --ns-success:      #16A34A;
+    --ns-success-rgb:  22, 163, 74;
+    --ns-warning:      #D97706;
+    --ns-warning-rgb:  217, 119, 6;
+    --ns-danger:       #DC2626;
+    --ns-danger-rgb:   220, 38, 38;
+    --ns-info:         #C9A227;
+    --ns-info-rgb:     201, 162, 39;
+}
+
+/* ---------- Bootstrap Variable Overrides (Light Mode) ---------- */
+:root,
+[data-bs-theme="light"] {
+    /* Primary */
+    --bs-primary:       var(--ns-brown);
+    --bs-primary-rgb:   var(--ns-brown-rgb);
+
+    /* Body */
+    --bs-body-bg:       var(--ns-off-white);
+    --bs-body-bg-rgb:   250, 249, 246;
+    --bs-body-color:    var(--ns-text);
+    --bs-body-color-rgb: 62, 39, 35;
+
+    /* Secondary backgrounds */
+    --bs-secondary-bg:  var(--ns-beige-light);
+    --bs-tertiary-bg:   var(--ns-off-white);
+
+    /* Borders */
+    --bs-border-color:  var(--ns-beige);
+
+    /* Semantic overrides */
+    --bs-success:       var(--ns-success);
+    --bs-success-rgb:   var(--ns-success-rgb);
+    --bs-warning:       var(--ns-warning);
+    --bs-warning-rgb:   var(--ns-warning-rgb);
+    --bs-danger:        var(--ns-danger);
+    --bs-danger-rgb:    var(--ns-danger-rgb);
+    --bs-info:          var(--ns-info);
+    --bs-info-rgb:      var(--ns-info-rgb);
+
+    /* Links */
+    --bs-link-color:        var(--ns-brown);
+    --bs-link-color-rgb:    var(--ns-brown-rgb);
+    --bs-link-hover-color:  var(--ns-brown-dark);
+
+    /* Emphasis */
+    --bs-emphasis-color:     var(--ns-text);
+    --bs-emphasis-color-rgb: 62, 39, 35;
+}
+
+/* ---------- Dark Mode ---------- */
+[data-bs-theme="dark"] {
+    --bs-body-bg:        #1a120b;
+    --bs-body-bg-rgb:    26, 18, 11;
+    --bs-body-color:     #e8ddd4;
+    --bs-body-color-rgb: 232, 221, 212;
+
+    --bs-primary:        #A07855;
+    --bs-primary-rgb:    160, 120, 85;
+
+    --bs-secondary-bg:   #2a1e14;
+    --bs-tertiary-bg:    #1f1610;
+
+    --bs-border-color:   #3d2e22;
+
+    --bs-emphasis-color:     #f3ede4;
+    --bs-emphasis-color-rgb: 243, 237, 228;
+
+    --bs-link-color:     #C9A227;
+    --bs-link-color-rgb: 201, 162, 39;
+    --bs-link-hover-color: #D4B44A;
+}
+
+/* ---------- Typography ---------- */
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+    --bs-btn-bg:            var(--ns-brown);
+    --bs-btn-border-color:  var(--ns-brown);
+    --bs-btn-hover-bg:      var(--ns-brown-dark);
+    --bs-btn-hover-border-color: var(--ns-brown-dark);
+    --bs-btn-active-bg:     var(--ns-brown-darker);
+    --bs-btn-active-border-color: var(--ns-brown-darker);
+    --bs-btn-disabled-bg:   var(--ns-brown-light);
+    --bs-btn-disabled-border-color: var(--ns-brown-light);
+}
+
+.btn-outline-primary {
+    --bs-btn-color:         var(--ns-brown);
+    --bs-btn-border-color:  var(--ns-brown);
+    --bs-btn-hover-bg:      var(--ns-brown);
+    --bs-btn-hover-border-color: var(--ns-brown);
+    --bs-btn-active-bg:     var(--ns-brown-dark);
+    --bs-btn-active-border-color: var(--ns-brown-dark);
+}
+
+/* ---------- Sidebar ---------- */
+#sidebar-wrapper {
+    background: var(--ns-brown-darker) !important;
+    border-right: 1px solid rgba(255,255,255,0.06) !important;
+    transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading h5,
+#sidebar-wrapper .sidebar-heading .m-0 {
+    color: var(--ns-off-white) !important;
+}
+
+#sidebar-wrapper .sidebar-heading i {
+    color: rgba(255,255,255,0.6) !important;
+}
+
+/* Sidebar brand icon */
+#sidebar-wrapper .bg-primary {
+    background-color: var(--ns-gold) !important;
+}
+
+/* Section labels */
+#sidebar-wrapper .text-uppercase.text-muted {
+    color: rgba(255,255,255,0.35) !important;
+}
+
+/* Nav items - default */
+#sidebar-wrapper .list-group-item {
+    color: rgba(255,255,255,0.7) !important;
+    background: transparent !important;
+    border: none !important;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#sidebar-wrapper .list-group-item i {
+    color: rgba(255,255,255,0.4) !important;
+}
+
+/* Nav items - hover */
+#sidebar-wrapper .list-group-item:hover {
+    background: rgba(255,255,255,0.08) !important;
+    color: var(--ns-off-white) !important;
+}
+
+#sidebar-wrapper .list-group-item:hover i {
+    color: rgba(255,255,255,0.65) !important;
+}
+
+/* Nav items - active */
+#sidebar-wrapper .list-group-item.bg-primary.bg-opacity-10,
+#sidebar-wrapper .list-group-item.active-nav {
+    background: rgba(201,162,39,0.12) !important;
+    color: var(--ns-gold-light) !important;
+}
+
+#sidebar-wrapper .list-group-item.bg-primary.bg-opacity-10 i,
+#sidebar-wrapper .list-group-item.active-nav i {
+    color: var(--ns-gold) !important;
+}
+
+/* Caret icon in sidebar header */
+#sidebar-wrapper .ph-caret-up-down {
+    color: rgba(255,255,255,0.3) !important;
+}
+
+/* Mobile: sidebar hidden by default */
+@media (max-width: 767.98px) {
+    #sidebar-wrapper {
+        position: fixed;
+        z-index: 1040;
+        margin-left: -260px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
+
+/* Desktop: sidebar visible by default */
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -260px;
+    }
+}
+
+.sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+/* ---------- Cards ---------- */
+.card {
+    --bs-card-bg: var(--ns-white);
+    --bs-card-border-color: var(--ns-beige);
+}
+
+[data-bs-theme="dark"] .card {
+    --bs-card-bg: #241a11;
+    --bs-card-border-color: #3d2e22;
+}
+
+/* ---------- Gold Accent Utilities ---------- */
+.text-gold {
+    color: var(--ns-gold) !important;
+}
+
+.bg-gold {
+    background-color: var(--ns-gold) !important;
+}
+
+.bg-gold-subtle {
+    background-color: rgba(201, 162, 39, 0.1) !important;
+}
+
+.border-gold {
+    border-color: var(--ns-gold) !important;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    --bs-navbar-color: var(--ns-text);
+}
+
+[data-bs-theme="dark"] .navbar {
+    background: #1f1610 !important;
+    border-color: #3d2e22 !important;
+}
+
+/* ---------- Tables ---------- */
+.table-light {
+    --bs-table-bg: var(--ns-beige-light);
+    --bs-table-color: var(--ns-text-muted);
+    --bs-table-border-color: var(--ns-beige);
+}
+
+.table-hover > tbody > tr:hover > * {
+    --bs-table-bg-state: rgba(111, 78, 55, 0.04);
+}
+
+[data-bs-theme="dark"] .table-light {
+    --bs-table-bg: #2a1e14;
+    --bs-table-color: #b0a49a;
+    --bs-table-border-color: #3d2e22;
+}
+
+/* ---------- Form Controls ---------- */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--ns-brown-light) !important;
+    box-shadow: 0 0 0 0.2rem rgba(111, 78, 55, 0.15) !important;
+    outline: none !important;
+}
+
+input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(111, 78, 55, 0.15) !important;
+    outline: none !important;
+}
+
+.form-control,
+.form-select {
+    border-color: var(--ns-beige);
+}
+
+.form-check-input:checked {
+    background-color: var(--ns-brown);
+    border-color: var(--ns-brown);
+}
+
+.form-check-input:focus {
+    border-color: var(--ns-brown-light);
+    box-shadow: 0 0 0 0.2rem rgba(111, 78, 55, 0.15);
+}
+
+/* ---------- Dropdowns ---------- */
+.dropdown-menu {
+    --bs-dropdown-border-color: var(--ns-beige);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: rgba(111, 78, 55, 0.06);
+}
+
+[data-bs-theme="dark"] .dropdown-menu {
+    --bs-dropdown-bg: #241a11;
+    --bs-dropdown-border-color: #3d2e22;
+}
+
+[data-bs-theme="dark"] .dropdown-item:hover,
+[data-bs-theme="dark"] .dropdown-item:focus {
+    background-color: rgba(201, 162, 39, 0.08);
+}
+
+/* ---------- Progress Bars ---------- */
+.progress {
+    --bs-progress-bg: var(--ns-beige);
+}
+
+/* ---------- Badges / Status Pills ---------- */
+.badge.bg-primary {
+    background-color: var(--ns-brown) !important;
+}
+
+/* ---------- Shadows (warm tint) ---------- */
+.shadow-sm {
+    box-shadow: 0 1px 3px rgba(62, 39, 35, 0.06), 0 1px 2px rgba(62, 39, 35, 0.04) !important;
+}
+
+.shadow {
+    box-shadow: 0 4px 6px rgba(62, 39, 35, 0.06), 0 2px 4px rgba(62, 39, 35, 0.04) !important;
+}
+
+/* ---------- Hover Lift ---------- */
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem rgba(62, 39, 35, 0.08) !important;
+}
+
+/* ---------- Smooth Page Transitions ---------- */
+#main-content {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Auth Pages ---------- */
+.bg-body-secondary {
+    background-color: var(--ns-off-white) !important;
+}
+
+/* ---------- Scrollbar (Webkit) ---------- */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--ns-beige);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ns-brown-light);
+}
+
+/* ---------- Utility Classes ---------- */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* ---------- Selection color ---------- */
+::selection {
+    background: rgba(201, 162, 39, 0.25);
+    color: var(--ns-text);
+}

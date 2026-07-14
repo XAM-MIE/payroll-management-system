@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Salary - Under Construction</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme.js"></script>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-body border-end" id="sidebar-wrapper"
+            style="min-width: 260px; max-width: 260px; min-height: 100vh; z-index: 1000;">
+            <!-- Brand & Workspace Switcher -->
+            <div class="sidebar-heading p-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="bg-primary text-white rounded-2 d-flex align-items-center justify-content-center"
+                        style="width: 32px; height: 32px;">
+                        <i class="ph-bold ph-wallet fs-5"></i>
+                    </div>
+                    <h5 class="m-0 fw-bold fs-5 tracking-tight">Net Salary</h5>
+                </div>
+                <i class="ph-bold ph-caret-up-down text-muted fs-6 cursor-pointer"></i>
+            </div>
+
+            <div class="list-group list-group-flush mt-2 px-3 gap-1">
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-2"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Main Menu</div>
+
+                <a href="dashboard.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-squares-four fs-5 me-3 text-muted"></i> Dashboard
+                </a>
+                <a href="pages/employees.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-users fs-5 me-3 text-muted"></i> Employees
+                </a>
+                <a href="pages/departments.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-buildings fs-5 me-3 text-muted"></i> Departments
+                </a>
+                <a href="pages/salary-grades.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-stack fs-5 me-3 text-muted"></i> Salary Grades
+                </a>
+
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-4"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Payroll Setup</div>
+
+                <a href="404.html?page=allowances" id="nav-allowances"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-plus-circle fs-5 me-3 text-muted"></i> Allowances
+                </a>
+                <a href="404.html?page=deductions" id="nav-deductions"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-minus-circle fs-5 me-3 text-muted"></i> Deductions
+                </a>
+                <a href="404.html?page=overtime" id="nav-overtime"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-clock fs-5 me-3 text-muted"></i> Overtime
+                </a>
+
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-4"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Operations</div>
+
+                <a href="404.html?page=run-payroll" id="nav-run-payroll"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-calculator fs-5 me-3 text-muted"></i> Run Payroll
+                </a>
+                <a href="404.html?page=payslips" id="nav-payslips"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-receipt fs-5 me-3 text-muted"></i> Payslips
+                </a>
+                <a href="404.html?page=reports" id="nav-reports"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-chart-line-up fs-5 me-3 text-muted"></i> Reports
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100 bg-body-tertiary d-flex flex-column h-100 min-vh-100">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg bg-body border-bottom px-4 py-2 sticky-top" style="height: 72px;">
+                <div class="d-flex align-items-center">
+                    <button
+                        class="btn btn-light me-3 d-flex align-items-center justify-content-center p-2 rounded-3 border-0 bg-body-secondary"
+                        id="menu-toggle">
+                        <i class="ph ph-list fs-5"></i>
+                    </button>
+                </div>
+
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    <!-- Theme Toggle -->
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center text-body"
+                            id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                            data-bs-display="static" aria-label="Toggle theme (auto)">
+                            <span class="theme-icon-active d-flex align-items-center" id="bd-theme-icon"><i
+                                    class="ph-fill ph-circle-half fs-5"></i></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="bd-theme-text">
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center"
+                                    data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="ph-fill ph-sun me-2 opacity-50"></i> Light
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center"
+                                    data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="ph-fill ph-moon me-2 opacity-50"></i> Dark
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center active"
+                                    data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="ph-fill ph-circle-half me-2 opacity-50"></i> Auto
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2 border-0 shadow-sm"
+                            type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://ui-avatars.com/api/?name=Admin+User&background=6F4E37&color=fff"
+                                class="rounded-circle" width="28" height="28" alt="User">
+                            <span class="fw-medium d-none d-sm-inline">Admin User</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item d-flex align-items-center text-danger" href="index.html"><i
+                                        class="ph ph-sign-out me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content Container -->
+            <div class="container-fluid p-4 flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center">
+                <div class="mb-4">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center p-4 mb-4"
+                        style="width: 100px; height: 100px;">
+                        <i class="ph-fill ph-hammer fs-1"></i>
+                    </div>
+                    <h2 class="fw-bold mb-3 display-6" id="pageTitle">Under Construction</h2>
+                    <p class="text-muted lead mx-auto" style="max-width: 500px;">
+                        We are currently building this feature. Check back soon once the development is complete!
+                    </p>
+                </div>
+
+                <a href="dashboard.html"
+                    class="btn btn-primary px-4 py-2 rounded-pill fw-medium d-inline-flex align-items-center gap-2 shadow-sm">
+                    <i class="ph-bold ph-arrow-left"></i> Return to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Extract page name from URL parameter if it exists
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page');
+        if (page) {
+            // Capitalize first letter and format
+            const formattedPage = page.charAt(0).toUpperCase() + page.slice(1).replace('-', ' ');
+            document.getElementById('pageTitle').innerText = formattedPage + ' is coming soon';
+
+            // Highlight the corresponding sidebar item
+            const navMap = {
+                'allowances': 'nav-allowances',
+                'deductions': 'nav-deductions',
+                'overtime': 'nav-overtime',
+                'run-payroll': 'nav-run-payroll',
+                'payslips': 'nav-payslips',
+                'reports': 'nav-reports'
+            };
+            const navId = navMap[page];
+            if (navId) {
+                const link = document.getElementById(navId);
+                if (link) {
+                    link.classList.remove('bg-transparent', 'text-body');
+                    link.classList.add('bg-primary', 'bg-opacity-10', 'text-primary', 'fw-semibold');
+                    const icon = link.querySelector('i');
+                    if (icon) {
+                        icon.className = icon.className.replace('ph ', 'ph-fill ');
+                        icon.className = icon.className.replace('text-muted', '');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Salary - Employees</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/theme.js"></script>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-body border-end" id="sidebar-wrapper"
+            style="min-width: 260px; max-width: 260px; min-height: 100vh; z-index: 1000;">
+            <!-- Brand & Workspace Switcher -->
+            <div class="sidebar-heading p-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="bg-primary text-white rounded-2 d-flex align-items-center justify-content-center"
+                        style="width: 32px; height: 32px;">
+                        <i class="ph-bold ph-wallet fs-5"></i>
+                    </div>
+                    <h5 class="m-0 fw-bold fs-5 tracking-tight">Net Salary</h5>
+                </div>
+                <i class="ph-bold ph-caret-up-down text-muted fs-6 cursor-pointer"></i>
+            </div>
+
+            <div class="list-group list-group-flush mt-2 px-3 gap-1">
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-2"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Main Menu</div>
+
+                <a href="../dashboard.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-squares-four fs-5 me-3 text-muted"></i> Dashboard
+                </a>
+                <a href="employees.html"
+                    class="list-group-item list-group-item-action bg-primary bg-opacity-10 text-primary border-0 rounded-3 d-flex align-items-center fw-semibold py-2 px-3 mb-1">
+                    <i class="ph-fill ph-users fs-5 me-3"></i> Employees
+                </a>
+                <a href="departments.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-buildings fs-5 me-3 text-muted"></i> Departments
+                </a>
+                <a href="salary-grades.html"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-stack fs-5 me-3 text-muted"></i> Salary Grades
+                </a>
+
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-4"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Payroll Setup</div>
+
+                <a href="../404.html?page=allowances"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-plus-circle fs-5 me-3 text-muted"></i> Allowances
+                </a>
+                <a href="../404.html?page=deductions"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-minus-circle fs-5 me-3 text-muted"></i> Deductions
+                </a>
+                <a href="../404.html?page=overtime"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-clock fs-5 me-3 text-muted"></i> Overtime
+                </a>
+
+                <div class="text-uppercase fw-bold text-muted px-3 mb-2 mt-4"
+                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Operations</div>
+
+                <a href="../404.html?page=run-payroll"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-calculator fs-5 me-3 text-muted"></i> Run Payroll
+                </a>
+                <a href="../404.html?page=payslips"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-receipt fs-5 me-3 text-muted"></i> Payslips
+                </a>
+                <a href="../404.html?page=reports"
+                    class="list-group-item list-group-item-action bg-transparent border-0 rounded-3 d-flex align-items-center py-2 px-3 mb-1 text-body">
+                    <i class="ph ph-chart-line-up fs-5 me-3 text-muted"></i> Reports
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100 bg-body-tertiary d-flex flex-column h-100 min-vh-100">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg bg-body border-bottom px-4 py-2 sticky-top" style="height: 72px;">
+                <div class="d-flex align-items-center">
+                    <button
+                        class="btn btn-light me-3 d-flex align-items-center justify-content-center p-2 rounded-3 border-0 bg-body-secondary"
+                        id="menu-toggle">
+                        <i class="ph ph-list fs-5"></i>
+                    </button>
+                    <div class="d-none d-md-flex align-items-center bg-body-secondary rounded-3 px-3 py-2 ms-2"
+                        style="width: 300px;">
+                        <i class="ph ph-magnifying-glass text-muted me-2"></i>
+                        <input type="text" id="globalSearchInput" class="form-control bg-transparent border-0 p-0 shadow-none"
+                            placeholder="Search employees...">
+                    </div>
+                </div>
+
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    <!-- Theme Toggle -->
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center text-body"
+                            id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                            data-bs-display="static" aria-label="Toggle theme (auto)">
+                            <span class="theme-icon-active d-flex align-items-center" id="bd-theme-icon"><i
+                                    class="ph-fill ph-circle-half fs-5"></i></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="bd-theme-text">
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center"
+                                    data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="ph-fill ph-sun me-2 opacity-50"></i> Light
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center"
+                                    data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="ph-fill ph-moon me-2 opacity-50"></i> Dark
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center active"
+                                    data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="ph-fill ph-circle-half me-2 opacity-50"></i> Auto
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2 border-0 shadow-sm"
+                            type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://ui-avatars.com/api/?name=Admin+User&background=6F4E37&color=fff"
+                                class="rounded-circle" width="28" height="28" alt="User">
+                            <span class="fw-medium d-none d-sm-inline">Admin User</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item d-flex align-items-center text-danger" href="../index.html"><i
+                                        class="ph ph-sign-out me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content Container -->
+            <div class="container-fluid p-4 flex-grow-1" id="main-content">
+                <!-- Welcome Section -->
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <h3 class="fw-bold mb-1">Employees Directory</h3>
+                        <p class="text-muted mb-0">Manage and update staff profiles, department linkages, and salary mappings.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary d-flex align-items-center gap-2 rounded-3 px-4 py-2 shadow-sm"
+                            data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                            <i class="ph-bold ph-user-plus"></i> Add Staff
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Summary Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card border bg-body rounded-4 shadow-sm">
+                            <div class="card-body p-4 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bold mb-1" id="statTotalEmployees">0</h3>
+                                    <p class="text-muted small mb-0 fw-medium">Total Staff</p>
+                                </div>
+                                <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-3">
+                                    <i class="ph-bold ph-users-three fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card border bg-body rounded-4 shadow-sm">
+                            <div class="card-body p-4 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bold mb-1 text-success" id="statActiveEmployees">0</h3>
+                                    <p class="text-muted small mb-0 fw-medium">Active Staff</p>
+                                </div>
+                                <div class="p-3 bg-success bg-opacity-10 text-success rounded-3">
+                                    <i class="ph-bold ph-user-circle-plus fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card border bg-body rounded-4 shadow-sm">
+                            <div class="card-body p-4 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bold mb-1" id="statMaleEmployees">0</h3>
+                                    <p class="text-muted small mb-0 fw-medium">Male Staff</p>
+                                </div>
+                                <div class="p-3 bg-info bg-opacity-10 text-info rounded-3">
+                                    <i class="ph-bold ph-gender-male fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card border bg-body rounded-4 shadow-sm">
+                            <div class="card-body p-4 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bold mb-1" id="statFemaleEmployees">0</h3>
+                                    <p class="text-muted small mb-0 fw-medium">Female Staff</p>
+                                </div>
+                                <div class="p-3 bg-warning bg-opacity-10 text-warning rounded-3">
+                                    <i class="ph-bold ph-gender-female fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Filters -->
+                <div class="card border bg-body rounded-4 shadow-sm mb-4">
+                    <div class="card-body p-3">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="ph ph-magnifying-glass"></i></span>
+                                    <input type="text" id="searchFilter" class="form-control border-start-0" placeholder="Search by name, email, or staff no...">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <select class="form-select" id="deptFilter">
+                                    <option value="All">All Departments</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <select class="form-select" id="statusFilter">
+                                    <option value="All">All Statuses</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 d-grid">
+                                <button class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2" id="resetFiltersBtn">
+                                    <i class="ph ph-arrows-counter-clockwise"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Directory Table Card -->
+                <div class="card shadow-sm border bg-body rounded-4">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr class="text-muted small text-uppercase" style="font-size: 0.75rem;">
+                                        <th class="fw-semibold px-4 py-3 border-0">Staff No</th>
+                                        <th class="fw-semibold py-3 border-0">Name</th>
+                                        <th class="fw-semibold py-3 border-0">Contact</th>
+                                        <th class="fw-semibold py-3 border-0">Department</th>
+                                        <th class="fw-semibold py-3 border-0">Salary Grade</th>
+                                        <th class="fw-semibold py-3 border-0">Hire Date</th>
+                                        <th class="fw-semibold py-3 border-0">Status</th>
+                                        <th class="fw-semibold px-4 py-3 border-0 text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="border-top-0" id="employeeTableBody">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Employee Modal -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white border-0 py-3 px-4">
+                    <h5 class="modal-title fw-bold" id="addEmployeeModalLabel">Register New Staff</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="addEmployeeForm">
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="staffNo" class="form-label fw-medium">Staff Number <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="staffNo" required placeholder="e.g. EMP007">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="hireDate" class="form-label fw-medium">Hire Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="hireDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="firstName" class="form-label fw-medium">First Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="firstName" required placeholder="e.g. Ada">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName" class="form-label fw-medium">Last Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="lastName" required placeholder="e.g. Nwosu">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label fw-medium">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" required placeholder="e.g. name@example.com">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label fw-medium">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="e.g. 08030000001">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="gender" class="form-label fw-medium">Gender <span class="text-danger">*</span></label>
+                                <select class="form-select" id="gender" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="departmentId" class="form-label fw-medium">Department <span class="text-danger">*</span></label>
+                                <select class="form-select" id="departmentId" required>
+                                    <!-- Dynamic -->
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="salaryGradeId" class="form-label fw-medium">Salary Grade <span class="text-danger">*</span></label>
+                                <select class="form-select" id="salaryGradeId" required>
+                                    <!-- Dynamic -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 px-4 pb-4">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 shadow-sm">Save Employee</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Employee Modal -->
+    <div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white border-0 py-3 px-4">
+                    <h5 class="modal-title fw-bold" id="editEmployeeModalLabel">Edit Staff Profile</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editEmployeeForm">
+                    <input type="hidden" id="editEmpId">
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="editStaffNo" class="form-label fw-medium">Staff Number <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="editStaffNo" required readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editHireDate" class="form-label fw-medium">Hire Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="editHireDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editFirstName" class="form-label fw-medium">First Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="editFirstName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editLastName" class="form-label fw-medium">Last Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="editLastName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editEmail" class="form-label fw-medium">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="editEmail" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editPhone" class="form-label fw-medium">Phone Number</label>
+                                <input type="tel" class="form-control" id="editPhone">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="editGender" class="form-label fw-medium">Gender <span class="text-danger">*</span></label>
+                                <select class="form-select" id="editGender" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="editDepartmentId" class="form-label fw-medium">Department <span class="text-danger">*</span></label>
+                                <select class="form-select" id="editDepartmentId" required>
+                                    <!-- Dynamic -->
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="editSalaryGradeId" class="form-label fw-medium">Salary Grade <span class="text-danger">*</span></label>
+                                <select class="form-select" id="editSalaryGradeId" required>
+                                    <!-- Dynamic -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editEmploymentStatus" class="form-label fw-medium">Status <span class="text-danger">*</span></label>
+                                <select class="form-select" id="editEmploymentStatus" required>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 px-4 pb-4">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 shadow-sm">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal (Required: Confirmation Popup) -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-body p-4 text-center">
+                    <div class="text-danger mb-3">
+                        <i class="ph-fill ph-warning-octagon fs-1"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Delete Employee?</h5>
+                    <p class="text-muted small mb-4">Are you sure you want to delete <span class="fw-semibold text-body" id="deleteEmpName">Employee</span>? This action is permanent and cannot be undone.</p>
+                    <input type="hidden" id="deleteEmpId">
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button type="button" class="btn btn-light rounded-pill px-4 flex-grow-1" data-bs-dismiss="modal">No, Keep</button>
+                        <button type="button" class="btn btn-danger rounded-pill px-4 flex-grow-1" id="confirmDeleteBtn">Yes, Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+    
+    <script>
+        // Mock Database logic using LocalStorage to make components "active"
+        const defaultDepts = [
+            { id: 1, name: 'Human Resources', manager: 'Amina Yusuf' },
+            { id: 2, name: 'Finance', manager: 'Tunde Bello' },
+            { id: 3, name: 'Information Technology', manager: 'David Mensah' },
+            { id: 4, name: 'Operations', manager: 'Chioma Okafor' },
+            { id: 5, name: 'Sales', manager: 'Ibrahim Musa' }
+        ];
+
+        const defaultGrades = [
+            { id: 1, name: 'Grade A', salary: 150000, tax: 5 },
+            { id: 2, name: 'Grade B', salary: 220000, tax: 7.5 },
+            { id: 3, name: 'Grade C', salary: 300000, tax: 10 },
+            { id: 4, name: 'Grade D', salary: 420000, tax: 12.5 }
+        ];
+
+        const defaultEmployees = [
+            { id: 1, staffNo: 'EMP001', firstName: 'Ada', lastName: 'Nwosu', email: 'ada.nwosu@example.com', phone: '08030000001', gender: 'Female', hireDate: '2024-02-12', departmentId: 1, salaryGradeId: 2, status: 'Active' },
+            { id: 2, staffNo: 'EMP002', firstName: 'Bayo', lastName: 'Adeyemi', email: 'bayo.adeyemi@example.com', phone: '08030000002', gender: 'Male', hireDate: '2023-08-01', departmentId: 2, salaryGradeId: 3, status: 'Active' },
+            { id: 3, staffNo: 'EMP003', firstName: 'Fatima', lastName: 'Sani', email: 'fatima.sani@example.com', phone: '08030000003', gender: 'Female', hireDate: '2025-01-15', departmentId: 4, salaryGradeId: 1, status: 'Active' },
+            { id: 4, staffNo: 'EMP004', firstName: 'Kelvin', lastName: 'Eze', email: 'kelvin.eze@example.com', phone: '08030000004', gender: 'Male', hireDate: '2024-10-20', departmentId: 3, salaryGradeId: 2, status: 'Active' },
+            { id: 5, staffNo: 'EMP005', firstName: 'Mary', lastName: 'Johnson', email: 'mary.johnson@example.com', phone: '08030000005', gender: 'Female', hireDate: '2022-06-05', departmentId: 5, salaryGradeId: 3, status: 'Active' },
+            { id: 6, staffNo: 'EMP006', firstName: 'Samuel', lastName: 'Okoro', email: 'samuel.okoro@example.com', phone: '08030000006', gender: 'Male', hireDate: '2021-11-18', departmentId: 2, salaryGradeId: 4, status: 'Active' }
+        ];
+
+        // Initialize localStorage if key doesn't exist
+        if (!localStorage.getItem('departments')) localStorage.setItem('departments', JSON.stringify(defaultDepts));
+        if (!localStorage.getItem('salaryGrades')) localStorage.setItem('salaryGrades', JSON.stringify(defaultGrades));
+        if (!localStorage.getItem('employees')) localStorage.setItem('employees', JSON.stringify(defaultEmployees));
+
+        function getDepartments() { return JSON.parse(localStorage.getItem('departments')); }
+        function getSalaryGrades() { return JSON.parse(localStorage.getItem('salaryGrades')); }
+        function getEmployees() { return JSON.parse(localStorage.getItem('employees')); }
+        function saveEmployees(data) { localStorage.setItem('employees', JSON.stringify(data)); }
+
+        // Render functions
+        function populateDropdowns() {
+            const depts = getDepartments();
+            const grades = getSalaryGrades();
+
+            const deptFilters = document.getElementById('deptFilter');
+            const addDeptSelect = document.getElementById('departmentId');
+            const editDeptSelect = document.getElementById('editDepartmentId');
+
+            const addGradeSelect = document.getElementById('salaryGradeId');
+            const editGradeSelect = document.getElementById('editSalaryGradeId');
+
+            // Reset
+            deptFilters.innerHTML = '<option value="All">All Departments</option>';
+            addDeptSelect.innerHTML = '';
+            editDeptSelect.innerHTML = '';
+            addGradeSelect.innerHTML = '';
+            editGradeSelect.innerHTML = '';
+
+            depts.forEach(d => {
+                deptFilters.innerHTML += `<option value="${d.id}">${d.name}</option>`;
+                addDeptSelect.innerHTML += `<option value="${d.id}">${d.name}</option>`;
+                editDeptSelect.innerHTML += `<option value="${d.id}">${d.name}</option>`;
+            });
+
+            grades.forEach(g => {
+                addGradeSelect.innerHTML += `<option value="${g.id}">${g.name} (${g.salary.toLocaleString('en-US', {style: 'currency', currency: 'USD', maximumFractionDigits: 0})}/mo)</option>`;
+                editGradeSelect.innerHTML += `<option value="${g.id}">${g.name} (${g.salary.toLocaleString('en-US', {style: 'currency', currency: 'USD', maximumFractionDigits: 0})}/mo)</option>`;
+            });
+        }
+
+        function calculateStats() {
+            const list = getEmployees();
+            document.getElementById('statTotalEmployees').innerText = list.length;
+            document.getElementById('statActiveEmployees').innerText = list.filter(e => e.status === 'Active').length;
+            document.getElementById('statMaleEmployees').innerText = list.filter(e => e.gender === 'Male').length;
+            document.getElementById('statFemaleEmployees').innerText = list.filter(e => e.gender === 'Female').length;
+        }
+
+        function renderEmployees() {
+            const emps = getEmployees();
+            const depts = getDepartments();
+            const grades = getSalaryGrades();
+
+            const searchVal = document.getElementById('searchFilter').value.toLowerCase();
+            const globalSearchVal = document.getElementById('globalSearchInput').value.toLowerCase();
+            const deptVal = document.getElementById('deptFilter').value;
+            const statusVal = document.getElementById('statusFilter').value;
+
+            const tbody = document.getElementById('employeeTableBody');
+            tbody.innerHTML = '';
+
+            const filtered = emps.filter(e => {
+                const fullName = `${e.firstName} ${e.lastName}`.toLowerCase();
+                const matchesSearch = fullName.includes(searchVal) || e.email.toLowerCase().includes(searchVal) || e.staffNo.toLowerCase().includes(searchVal);
+                const matchesGlobalSearch = fullName.includes(globalSearchVal) || e.email.toLowerCase().includes(globalSearchVal) || e.staffNo.toLowerCase().includes(globalSearchVal);
+                const matchesDept = deptVal === 'All' || e.departmentId == deptVal;
+                const matchesStatus = statusVal === 'All' || e.status === statusVal;
+
+                return matchesSearch && matchesGlobalSearch && matchesDept && matchesStatus;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-5 text-muted">No employees found.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(e => {
+                const deptName = depts.find(d => d.id == e.departmentId)?.name || 'Unknown';
+                const gradeName = grades.find(g => g.id == e.salaryGradeId)?.name || 'Unknown';
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="px-4 fw-semibold">${e.staffNo}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://ui-avatars.com/api/?name=${e.firstName}+${e.lastName}&background=E8E0D5&color=3E2723" class="rounded-circle me-3" width="32" height="32">
+                                <div>
+                                    <h6 class="mb-0 fw-semibold fs-6">${e.firstName} ${e.lastName}</h6>
+                                    <small class="text-muted text-capitalize">${e.gender}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="small fw-medium">${e.email}</div>
+                            <small class="text-muted">${e.phone || 'No phone'}</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-body-secondary text-body-emphasis border border-opacity-50 px-2 py-1">${deptName}</span>
+                        </td>
+                        <td>${gradeName}</td>
+                        <td class="text-muted small">${e.hireDate}</td>
+                        <td>
+                            <span class="badge ${e.status === 'Active' ? 'bg-success bg-opacity-10 text-success border-success' : 'bg-secondary bg-opacity-10 text-secondary border-secondary'} px-3 py-2 rounded-pill fw-medium border border-opacity-25 d-inline-flex align-items-center gap-1">
+                                <div class="rounded-circle ${e.status === 'Active' ? 'bg-success' : 'bg-secondary'}" style="width: 6px; height: 6px;"></div> ${e.status}
+                            </span>
+                        </td>
+                        <td class="px-4 text-end">
+                            <button class="btn btn-sm btn-light border p-1 rounded-2 cursor-pointer me-1" onclick="openEditModal(${e.id})" title="Edit Profile">
+                                <i class="ph ph-pencil fs-5"></i>
+                            </button>
+                            <button class="btn btn-sm btn-light border p-1 rounded-2 cursor-pointer text-danger" onclick="openDeleteModal(${e.id}, '${e.firstName} ${e.lastName}')" title="Delete Profile">
+                                <i class="ph ph-trash fs-5"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // CRUD Event listeners
+        document.getElementById('addEmployeeForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const emps = getEmployees();
+            const nextId = emps.reduce((max, emp) => emp.id > max ? emp.id : max, 0) + 1;
+
+            const newEmp = {
+                id: nextId,
+                staffNo: document.getElementById('staffNo').value,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                gender: document.getElementById('gender').value,
+                hireDate: document.getElementById('hireDate').value,
+                departmentId: parseInt(document.getElementById('departmentId').value),
+                salaryGradeId: parseInt(document.getElementById('salaryGradeId').value),
+                status: 'Active'
+            };
+
+            // Validation: Unique staffNo and Email
+            if (emps.some(emp => emp.staffNo.toUpperCase() === newEmp.staffNo.toUpperCase())) {
+                alert("Staff Number must be unique!");
+                return;
+            }
+            if (emps.some(emp => emp.email.toLowerCase() === newEmp.email.toLowerCase())) {
+                alert("Email must be unique!");
+                return;
+            }
+
+            emps.push(newEmp);
+            saveEmployees(emps);
+
+            // Reset modal and views
+            const addModal = bootstrap.Modal.getInstance(document.getElementById('addEmployeeModal'));
+            addModal.hide();
+            document.getElementById('addEmployeeForm').reset();
+            
+            calculateStats();
+            renderEmployees();
+        });
+
+        function openEditModal(id) {
+            const emps = getEmployees();
+            const emp = emps.find(e => e.id == id);
+            if (!emp) return;
+
+            document.getElementById('editEmpId').value = emp.id;
+            document.getElementById('editStaffNo').value = emp.staffNo;
+            document.getElementById('editFirstName').value = emp.firstName;
+            document.getElementById('editLastName').value = emp.lastName;
+            document.getElementById('editEmail').value = emp.email;
+            document.getElementById('editPhone').value = emp.phone || '';
+            document.getElementById('editGender').value = emp.gender;
+            document.getElementById('editHireDate').value = emp.hireDate;
+            document.getElementById('editDepartmentId').value = emp.departmentId;
+            document.getElementById('editSalaryGradeId').value = emp.salaryGradeId;
+            document.getElementById('editEmploymentStatus').value = emp.status;
+
+            const editModal = new bootstrap.Modal(document.getElementById('editEmployeeModal'));
+            editModal.show();
+        }
+
+        document.getElementById('editEmployeeForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const emps = getEmployees();
+            const id = parseInt(document.getElementById('editEmpId').value);
+
+            const index = emps.findIndex(emp => emp.id === id);
+            if (index !== -1) {
+                // Email uniqueness validation (excluding self)
+                const emailInput = document.getElementById('editEmail').value;
+                if (emps.some(emp => emp.id !== id && emp.email.toLowerCase() === emailInput.toLowerCase())) {
+                    alert("Email must be unique!");
+                    return;
+                }
+
+                emps[index].firstName = document.getElementById('editFirstName').value;
+                emps[index].lastName = document.getElementById('editLastName').value;
+                emps[index].email = emailInput;
+                emps[index].phone = document.getElementById('editPhone').value;
+                emps[index].gender = document.getElementById('editGender').value;
+                emps[index].hireDate = document.getElementById('editHireDate').value;
+                emps[index].departmentId = parseInt(document.getElementById('editDepartmentId').value);
+                emps[index].salaryGradeId = parseInt(document.getElementById('editSalaryGradeId').value);
+                emps[index].status = document.getElementById('editEmploymentStatus').value;
+
+                saveEmployees(emps);
+
+                const editModal = bootstrap.Modal.getInstance(document.getElementById('editEmployeeModal'));
+                editModal.hide();
+
+                calculateStats();
+                renderEmployees();
+            }
+        });
+
+        function openDeleteModal(id, name) {
+            document.getElementById('deleteEmpId').value = id;
+            document.getElementById('deleteEmpName').innerText = name;
+
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            deleteModal.show();
+        }
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
+            const id = parseInt(document.getElementById('deleteEmpId').value);
+            let emps = getEmployees();
+            emps = emps.filter(emp => emp.id !== id);
+            saveEmployees(emps);
+
+            const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+            deleteModal.hide();
+
+            calculateStats();
+            renderEmployees();
+        });
+
+        // Search & Filter listeners
+        document.getElementById('searchFilter').addEventListener('input', renderEmployees);
+        document.getElementById('globalSearchInput').addEventListener('input', renderEmployees);
+        document.getElementById('deptFilter').addEventListener('change', renderEmployees);
+        document.getElementById('statusFilter').addEventListener('change', renderEmployees);
+
+        document.getElementById('resetFiltersBtn').addEventListener('click', function () {
+            document.getElementById('searchFilter').value = '';
+            document.getElementById('globalSearchInput').value = '';
+            document.getElementById('deptFilter').value = 'All';
+            document.getElementById('statusFilter').value = 'All';
+            renderEmployees();
+        });
+
+        // Initialize view
+        window.addEventListener('DOMContentLoaded', () => {
+            populateDropdowns();
+            calculateStats();
+            renderEmployees();
+        });
+    </script>
+</body>
+
+</html>
