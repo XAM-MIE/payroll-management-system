@@ -7,7 +7,7 @@
    variables rather than hardcoding new colors.
    ========================================================= */
 
-   :root {
+:root {
   /* Backgrounds */
   --bg-page:        #FAF9F6;
   --bg-card:        #FFFFFF;
@@ -35,18 +35,18 @@
   --border-soft:    #E8E0D5;
   --border-gold:    rgba(201, 162, 39, 0.35);
 
-  /* Status colors (semantic — used only for status badges/amounts, not brand elements) */
+  /* Status colors (semantic — only for badges/amounts, not brand elements) */
   --danger:         #DC2626;
-  --danger-bg:      #FBEAEA;
+  --danger-bg:      #FBEAE9;
   --success:        #16A34A;
   --success-bg:     #E7F6EC;
   --pending:        #D97706;
   --pending-bg:     #FBF0E0;
 
   /* Fonts */
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: 'Inter', sans-serif;
   --font-body:    'Inter', sans-serif;
-  --font-mono:    'IBM Plex Mono', monospace;
+  --font-mono:    'Inter', sans-serif;
 
   --sidebar-width: 250px;
 }
