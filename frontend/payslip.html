@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payroll Management System — Payslip</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Our custom theme (goes on top of Bootstrap) -->
+  <link rel="stylesheet" href="css/payroll-theme.css">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <i class="bi bi-shield-lock-fill"></i>
+        <span>PAYROLL<span class="brand-accent">PRO</span></span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="dashboard.html" class="nav-link">
+          <i class="bi bi-grid-1x2-fill"></i> Dashboard
+        </a>
+        <a href="employees.html" class="nav-link">
+          <i class="bi bi-people-fill"></i> Employees
+        </a>
+        <a href="departments.html" class="nav-link">
+          <i class="bi bi-diagram-3-fill"></i> Departments
+        </a>
+        <a href="salary-grades.html" class="nav-link">
+          <i class="bi bi-bar-chart-fill"></i> Salary Grades
+        </a>
+
+        <div class="sidebar-section-label">Payroll Setup</div>
+        <a href="allowances.html" class="nav-link">
+          <i class="bi bi-plus-circle-fill"></i> Allowances
+        </a>
+        <a href="deductions.html" class="nav-link">
+          <i class="bi bi-dash-circle-fill"></i> Deductions
+        </a>
+        <a href="overtime.html" class="nav-link">
+          <i class="bi bi-clock-fill"></i> Overtime
+        </a>
+
+        <div class="sidebar-section-label">Operations</div>
+        <a href="payroll-processing.html" class="nav-link">
+          <i class="bi bi-calculator-fill"></i> Run Payroll
+        </a>
+        <a href="payslip.html" class="nav-link active">
+          <i class="bi bi-receipt"></i> Payslips
+        </a>
+        <a href="reports.html" class="nav-link">
+          <i class="bi bi-file-earmark-bar-graph-fill"></i> Reports
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" class="nav-link logout-link">
+          <i class="bi bi-box-arrow-left"></i> Sign out
+        </a>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN COLUMN (navbar + content) ============ -->
+    <div class="main-column">
+
+      <!-- Top navbar -->
+      <header class="topbar">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+          <i class="bi bi-list"></i>
+        </button>
+
+        <div class="topbar-search">
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="Search payroll…" aria-label="Search">
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-btn" aria-label="Notifications">
+            <i class="bi bi-bell-fill"></i>
+          </button>
+          <div class="user-chip">
+            <div class="user-avatar">B</div>
+            <span class="user-name">Blessing</span>
+            <i class="bi bi-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page content -->
+      <main class="page-content">
+
+        <div class="page-header d-flex justify-content-between align-items-start flex-wrap gap-3 no-print">
+          <div>
+            <h1>Payslips</h1>
+            <p class="page-subtitle">View and print an individual employee payslip</p>
+          </div>
+        </div>
+
+        <!-- Selector (hidden when printing) -->
+        <div class="table-card mb-4 no-print">
+          <div class="p-4 d-flex flex-wrap gap-3 align-items-end">
+            <div>
+              <label class="form-label" style="font-size:13px; font-weight:500; color:var(--text-muted);">Employee</label>
+              <select class="form-select" id="payslipEmployee" onchange="loadPayslip()" style="min-width:220px;">
+                <option value="John Doe">John Doe</option>
+                <option value="Jane Doe">Jane Doe</option>
+                <option value="John Smith">John Smith</option>
+                <option value="Janet Maxwell">Janet Maxwell</option>
+                <option value="Alen Green">Alen Green</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label" style="font-size:13px; font-weight:500; color:var(--text-muted);">Period</label>
+              <select class="form-select" id="payslipPeriod" onchange="loadPayslip()" style="min-width:160px;">
+                <option>July 2026</option>
+                <option>June 2026</option>
+                <option>May 2026</option>
+              </select>
+            </div>
+            <button class="btn-brand ms-auto" onclick="window.print()">
+              <i class="bi bi-printer-fill"></i> Print / Download PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- The actual payslip -->
+        <div class="payslip-sheet" id="payslip">
+          <div class="payslip-header">
+            <div>
+              <div class="payslip-brand"><i class="bi bi-shield-lock-fill"></i> PAYROLL<span class="brand-accent">PRO</span></div>
+              <div class="text-muted" style="font-size:12.5px;">Payslip — <span id="ps-period">July 2026</span></div>
+            </div>
+            <div class="text-end">
+              <div class="fw-semibold" id="ps-name" style="font-size:16px;">John Doe</div>
+              <div class="text-muted" style="font-size:12.5px;">Employee ID: <span id="ps-id" class="mono">EMP-0001</span></div>
+            </div>
+          </div>
+
+          <div class="row g-3 mt-1 mb-4">
+            <div class="col-6 col-md-3">
+              <div class="payslip-meta-label">Department</div>
+              <div class="payslip-meta-value" id="ps-dept">Operations</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="payslip-meta-label">Salary Grade</div>
+              <div class="payslip-meta-value" id="ps-grade">Grade 3</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="payslip-meta-label">Pay Date</div>
+              <div class="payslip-meta-value" id="ps-date">Jul 31, 2026</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="payslip-meta-label">Payment Method</div>
+              <div class="payslip-meta-value">Bank Transfer</div>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-12 col-md-6">
+              <h6 class="payslip-section-title">Earnings</h6>
+              <table class="payslip-line-table">
+                <tr><td>Basic Salary</td><td class="text-end mono" id="ps-basic">$1,200.00</td></tr>
+                <tr><td>Overtime</td><td class="text-end mono" id="ps-ot">$50.00</td></tr>
+                <tr><td>Allowances</td><td class="text-end mono" id="ps-allow">$100.00</td></tr>
+                <tr class="payslip-line-total"><td>Gross Earnings</td><td class="text-end mono" id="ps-gross">$1,350.00</td></tr>
+              </table>
+            </div>
+            <div class="col-12 col-md-6">
+              <h6 class="payslip-section-title">Deductions</h6>
+              <table class="payslip-line-table">
+                <tr><td>Tax (PAYE)</td><td class="text-end mono" id="ps-tax">$120.00</td></tr>
+                <tr><td>Pension</td><td class="text-end mono" id="ps-pension">$60.00</td></tr>
+                <tr><td>Other</td><td class="text-end mono" id="ps-other">$0.00</td></tr>
+                <tr class="payslip-line-total"><td>Total Deductions</td><td class="text-end mono" id="ps-total-deductions">$180.00</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="payslip-net-pay">
+            <span>Net Pay</span>
+            <span class="mono" id="ps-net">$1,170.00</span>
+          </div>
+
+          <p class="text-muted text-center mt-4 mb-0" style="font-size:11.5px;">
+            This is a system-generated payslip — Payroll Management System, CSC421 Group 7.
+          </p>
+        </div>
+
+        <p class="content-note mt-4 no-print">
+          <i class="bi bi-info-circle"></i>
+          This page currently shows sample figures per employee. Once Sammy's payslip route is ready, selecting an employee/period will pull their real computed payslip from the database instead.
+        </p>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/payroll-app.js"></script>
+  <script src="js/payslip.js"></script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+/* =========================================================
+   PAYROLL MANAGEMENT SYSTEM — SHARED THEME
+   Palette: gold + brown + white/cream
+   This file sits ON TOP of Bootstrap — it only overrides
+   colors, fonts, and a few layout pieces (sidebar/navbar).
+   Everyone on the frontend team should use these same
+   variables rather than hardcoding new colors.
+   ========================================================= */
+
+   :root {
+  /* Backgrounds */
+  --bg-page:        #FAF9F6;
+  --bg-card:        #FFFFFF;
+  --bg-beige:       #E8E0D5;
+  --bg-beige-light: #F3EDE4;
+
+  /* Brand browns (used for sidebar/navbar only) */
+  --brown-dark:     #3E2723;
+  --brown-mid:      #6F4E37;
+  --brown-light:    #8B6B50;
+
+  /* Gold accent */
+  --gold:           #C9A227;
+  --gold-light:     #D4B44A;
+  --gold-dark:      #A88820;
+  --gold-soft-bg:   rgba(201, 162, 39, 0.10);
+
+  /* Text */
+  --text-dark:      #3E2723;
+  --text-muted:     #7A6B63;
+  --text-on-brown:  #FAF9F6;
+  --text-on-brown-muted: #C9B8A8;
+
+  /* Borders */
+  --border-soft:    #E8E0D5;
+  --border-gold:    rgba(201, 162, 39, 0.35);
+
+  /* Status colors (semantic — used only for status badges/amounts, not brand elements) */
+  --danger:         #DC2626;
+  --danger-bg:      #FBEAEA;
+  --success:        #16A34A;
+  --success-bg:     #E7F6EC;
+  --pending:        #D97706;
+  --pending-bg:     #FBF0E0;
+
+  /* Fonts */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  --sidebar-width: 250px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg-page);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+}
+
+.mono { font-family: var(--font-mono); }
+
+/* APP SHELL LAYOUT */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background: var(--brown-dark);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  transition: margin-left 0.2s ease;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  color: var(--text-on-brown);
+  border-bottom: 1px solid rgba(245, 239, 230, 0.08);
+}
+
+.sidebar-brand i { color: var(--gold); font-size: 20px; }
+.brand-accent { color: var(--gold); }
+
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 12px;
+  overflow-y: auto;
+}
+
+.sidebar-nav .nav-link,
+.sidebar-footer .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  color: var(--text-on-brown-muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-nav .nav-link i,
+.sidebar-footer .nav-link i {
+  font-size: 15px;
+  width: 18px;
+  text-align: center;
+}
+
+.sidebar-nav .nav-link:hover {
+  background: rgba(245, 239, 230, 0.06);
+  color: var(--text-on-brown);
+}
+
+.sidebar-nav .nav-link.active {
+  background: var(--gold-soft-bg);
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid rgba(245, 239, 230, 0.08);
+}
+
+.logout-link:hover { color: #E5A0A0 !important; }
+
+/* MAIN COLUMN */
+.main-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP NAVBAR */
+.topbar {
+  height: 68px;
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: none;
+}
+
+.topbar-search {
+  flex: 1;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-page);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.topbar-search i { color: var(--text-muted); font-size: 14px; }
+
+.topbar-search input {
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 13.5px;
+  width: 100%;
+  color: var(--text-dark);
+  font-family: var(--font-body);
+}
+
+.topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 17px;
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+}
+
+.icon-btn:hover { color: var(--gold); }
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.user-chip:hover { background: var(--gold-soft-bg); }
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: var(--font-display);
+}
+
+.user-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* PAGE CONTENT */
+.page-content {
+  padding: 28px 32px 48px;
+}
+
+.page-header { margin-bottom: 24px; }
+
+.page-header h1 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: var(--text-dark);
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* STAT CARDS */
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+}
+
+.stat-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--gold-soft-bg);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.content-note {
+  margin-top: 24px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  background: var(--gold-soft-bg);
+  border: 1px dashed var(--border-gold);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.content-note i { color: var(--gold); margin-right: 6px; }
+
+/* GENERIC COMPONENTS */
+.btn-brand {
+  background: var(--gold);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.btn-brand:hover { background: var(--gold-light); color: #fff; }
+
+.btn-outline-brand {
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  color: var(--brown-mid);
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.btn-outline-brand:hover {
+  background: var(--gold-soft-bg);
+  color: var(--brown-mid);
+}
+
+/* TABLES */
+.table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-card table { margin-bottom: 0; }
+
+.table-card thead {
+  background: var(--bg-page);
+}
+
+.table-card th {
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.table-card td {
+  font-size: 14px;
+  color: var(--text-dark);
+  vertical-align: middle;
+}
+
+/* SIDEBAR SECTION LABELS */
+.sidebar-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-on-brown-muted);
+  opacity: 0.6;
+  padding: 16px 14px 6px;
+}
+
+.sidebar-section-label:first-child { padding-top: 4px; }
+
+/* HERO PAYROLL CARD */
+.hero-card {
+  background: var(--brown-dark);
+  border-radius: 12px;
+  padding: 22px;
+  color: var(--text-on-brown);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-card-label {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-on-brown-muted);
+  margin-bottom: 10px;
+}
+
+.hero-card-value {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.hero-progress-track {
+  height: 6px;
+  background: rgba(245, 239, 230, 0.15);
+  border-radius: 999px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.hero-progress-fill {
+  height: 100%;
+  background: var(--gold-light);
+  border-radius: 999px;
+}
+
+.hero-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-on-brown-muted);
+  margin-top: 8px;
+}
+
+/* STATUS BADGES */
+.badge-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge-success { background: var(--success-bg); color: var(--success); }
+.badge-pending { background: var(--pending-bg); color: var(--pending); }
+
+.amount-negative { color: var(--danger); font-family: var(--font-mono); font-weight: 600; }
+.amount-positive { color: var(--success); font-family: var(--font-mono); font-weight: 600; }
+
+/* QUICK ACTION TILES */
+.quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.quick-action-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--gold-soft-bg);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: background 0.15s ease;
+}
+
+.quick-action:hover .quick-action-icon { background: var(--gold); color: #fff; }
+
+.side-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.side-card h6 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.approval-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-page);
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+.approval-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--pending-bg);
+  color: var(--pending);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.approval-text { flex: 1; min-width: 0; }
+.approval-title { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.approval-sub { font-size: 12px; color: var(--text-muted); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    z-index: 20;
+    margin-left: calc(var(--sidebar-width) * -1);
+  }
+
+  .sidebar.open { margin-left: 0; }
+
+  .sidebar-toggle { display: block; }
+
+  .page-content { padding: 20px 16px 40px; }
+}
+
+/* =========================================================
+   PAYSLIP PAGE — printable sheet styling
+   ========================================================= */
+.payslip-sheet {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.payslip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border-gold);
+}
+
+.payslip-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-dark);
+}
+
+.payslip-brand i { color: var(--gold); margin-right: 6px; }
+
+.payslip-meta-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.payslip-meta-value {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.payslip-section-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--brown-mid);
+  margin-bottom: 10px;
+}
+
+.payslip-line-table {
+  width: 100%;
+  font-size: 14px;
+  border-collapse: collapse;
+}
+
+.payslip-line-table td {
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--border-soft);
+  color: var(--text-dark);
+}
+
+.payslip-line-total td {
+  border-bottom: none;
+  border-top: 1px solid var(--border-soft);
+  font-weight: 700;
+  padding-top: 10px;
+}
+
+.payslip-net-pay {
+  margin-top: 24px;
+  background: var(--brown-dark);
+  color: var(--gold-light);
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Print mode — hide sidebar/navbar/controls, show only the payslip */
+@media print {
+  .no-print,
+  .sidebar,
+  .topbar {
+    display: none !important;
+  }
+
+  .page-content {
+    padding: 0 !important;
+  }
+
+  .payslip-sheet {
+    border: none;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  body {
+    background: #fff;
+  }
+}
+
+/* =========================================================
+   REPORTS PAGE — tab styling
+   ========================================================= */
+.report-tabs {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  flex-wrap: wrap;
+}
+
+.report-tab {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.report-tab i { font-size: 13px; }
+
+.report-tab:hover {
+  border-color: var(--border-gold);
+  color: var(--brown-mid);
+}
+
+.report-tab.active {
+  background: var(--brown-dark);
+  border-color: var(--brown-dark);
+  color: var(--gold-light);
+}
+
+/* =========================================================
+   BOOTSTRAP VARIABLE OVERRIDES
+   Matches Ejiro's approach — maps Bootstrap 5's own color
+   variables to our palette, so plain Bootstrap classes like
+   .btn-primary, .bg-primary, .text-primary automatically use
+   our brand colors instead of Bootstrap's default blue.
+   ========================================================= */
+:root {
+  --bs-primary:      #6F4E37;
+  --bs-primary-rgb:  111, 78, 55;
+
+  --bs-secondary:     #C9A227;
+  --bs-secondary-rgb: 201, 162, 39;
+
+  --bs-success:      #16A34A;
+  --bs-success-rgb:  22, 163, 74;
+
+  --bs-danger:       #DC2626;
+  --bs-danger-rgb:   220, 38, 38;
+
+  --bs-warning:      #D97706;
+  --bs-warning-rgb:  217, 119, 6;
+
+  --bs-info:         #C9A227;
+  --bs-info-rgb:     201, 162, 39;
+
+  --bs-body-color:   #3E2723;
+  --bs-body-bg:      #FAF9F6;
+
+  --bs-link-color:       #6F4E37;
+  --bs-link-hover-color: #5A3E2B;
+
+  --bs-border-color: #E8E0D5;
+}
