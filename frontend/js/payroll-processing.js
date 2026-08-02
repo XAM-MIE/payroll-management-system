@@ -1,21 +1,10 @@
 // ==========================================================
-// Payroll Processing page
-// "Process Payroll" currently calculates using made-up sample
-// figures per employee. Once Sammy's payroll route is ready,
-// runPayroll() is where you'd replace this with a real
-// fetch() POST sending {month, year, employees[]} and
-// displaying whatever the backend calculates and returns.
+// Payroll Processing page — now connected to Sammy's backend
+// Since /payroll/process handles ONE employee per call, we
+// loop through every selected employee and call it once each.
 // ==========================================================
 
-// Sample base figures per employee — stand-ins for real
-// salary/overtime/deduction data that will come from the database.
-const sampleFigures = {
-  'John Doe':       { basic: 1200.00, overtime: 50.00,  deductions: 145.00 },
-  'Jane Doe':        { basic: 1350.00, overtime: 35.00,  deductions: 165.00 },
-  'John Smith':      { basic: 1100.00, overtime: 78.00,  deductions: 130.00 },
-  'Janet Maxwell':   { basic: 1450.00, overtime: 46.50,  deductions: 175.50 },
-  'Alen Green':      { basic: 980.00,  overtime: 0.00,   deductions: 100.00 }
-};
+const API_BASE = 'http://localhost:3000';
 
 function toggleAllEmployees() {
   const selectAll = document.getElementById('selectAllEmployees').checked;
@@ -24,46 +13,90 @@ function toggleAllEmployees() {
   });
 }
 
-function runPayroll() {
+async function runPayroll() {
   const selectedBoxes = document.querySelectorAll('.employee-checkbox:checked');
+  const processNote = document.getElementById('processNote');
 
   if (selectedBoxes.length === 0) {
-    document.getElementById('processNote').textContent = 'Select at least one employee first.';
-    document.getElementById('processNote').style.color = 'var(--danger)';
+    processNote.textContent = 'Select at least one employee first.';
+    processNote.style.color = 'var(--danger)';
     return;
   }
-
-  document.getElementById('processNote').textContent = '';
 
   const month = document.getElementById('payrollMonth').value;
   const year = document.getElementById('payrollYear').value;
 
+  processNote.textContent = 'Processing…';
+  processNote.style.color = 'var(--text-muted)';
+
   const tbody = document.getElementById('resultsTableBody');
-  tbody.innerHTML = ''; // clear previous run
+  tbody.innerHTML = '';
   let totalNet = 0;
+  let failedCount = 0;
 
-  selectedBoxes.forEach(box => {
-    const name = box.value;
-    const figures = sampleFigures[name] || { basic: 1000, overtime: 0, deductions: 0 };
-    const net = figures.basic + figures.overtime - figures.deductions;
-    totalNet += net;
+  // Loop through each selected employee, one request at a time,
+  // exactly as Sammy described — this also makes it easy to see
+  // which specific employee fails, if any do.
+  for (const box of selectedBoxes) {
+    const employeeName = box.value;
 
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td class="ps-4 fw-semibold">${name}</td>
-      <td class="mono">$${figures.basic.toFixed(2)}</td>
-      <td class="mono amount-positive">$${figures.overtime.toFixed(2)}</td>
-      <td class="mono amount-negative">-$${figures.deductions.toFixed(2)}</td>
-      <td class="pe-4 mono fw-semibold">$${net.toFixed(2)}</td>
-    `;
-    tbody.appendChild(row);
-  });
+    try {
+      const response = await fetch(`${API_BASE}/payroll/process`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          employee_name: employeeName,
+          month: month,
+          year: year
+        })
+      });
+
+      if (!response.ok) throw new Error(`Failed for ${employeeName}`);
+
+      const result = await response.json();
+
+      // These field names are a best guess based on Sammy's description
+      // (gross, deductions, net). If his actual response uses different
+      // field names, just adjust the result.xxx lines below to match.
+      const basic = Number(result.basic ?? result.basic_salary ?? 0);
+      const overtime = Number(result.overtime ?? result.overtime_pay ?? 0);
+      const deductions = Number(result.deductions ?? result.total_deductions ?? 0);
+      const net = Number(result.net ?? result.net_pay ?? (basic + overtime - deductions));
+
+      totalNet += net;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="ps-4 fw-semibold">${employeeName}</td>
+        <td class="mono">$${basic.toFixed(2)}</td>
+        <td class="mono amount-positive">$${overtime.toFixed(2)}</td>
+        <td class="mono amount-negative">-$${deductions.toFixed(2)}</td>
+        <td class="pe-4 mono fw-semibold">$${net.toFixed(2)}</td>
+      `;
+      tbody.appendChild(row);
+
+    } catch (error) {
+      console.error(error);
+      failedCount++;
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="ps-4 fw-semibold">${employeeName}</td>
+        <td colspan="4" class="text-danger">Failed to process this employee</td>
+      `;
+      tbody.appendChild(row);
+    }
+  }
 
   document.getElementById('totalNetPay').textContent = `$${totalNet.toFixed(2)}`;
   document.getElementById('resultsSection').classList.remove('d-none');
-  document.getElementById('processNote').textContent = `Processed for ${month} ${year}.`;
-  document.getElementById('processNote').style.color = 'var(--text-muted)';
 
-  // Scroll results into view so it's obvious something happened
+  if (failedCount > 0) {
+    processNote.textContent = `Processed for ${month} ${year} — ${failedCount} employee(s) failed, check console.`;
+    processNote.style.color = 'var(--danger)';
+  } else {
+    processNote.textContent = `Processed successfully for ${month} ${year}.`;
+    processNote.style.color = 'var(--text-muted)';
+  }
+
   document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

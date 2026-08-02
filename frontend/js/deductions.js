@@ -1,18 +1,59 @@
 // ==========================================================
-// Deductions page — search/filter, add/edit, delete confirm
-// This is sample-data logic for now. Once Sammy shares the
-// backend routes, the "Save Deduction" part of this file is
-// where you'd replace the fake row-adding with a real
-// fetch() POST request to the backend instead.
+// Deductions page — now connected to Sammy's real backend
+// Base URL: http://localhost:3000
 // ==========================================================
+
+const API_BASE = 'http://localhost:3000';
 
 const deductionForm = document.getElementById('deductionForm');
 const deductionModalEl = document.getElementById('deductionModal');
 const deductionModal = new bootstrap.Modal(deductionModalEl);
 const deductionModalTitle = document.getElementById('deductionModalTitle');
-let editingRow = null; // tracks which row we're editing, if any
+let editingDeductionId = null; // real database ID when editing, null when adding
 
-// ---------- SEARCH + FILTER ----------
+// ---------- LOAD REAL DATA ON PAGE OPEN ----------
+document.addEventListener('DOMContentLoaded', loadDeductions);
+
+async function loadDeductions() {
+  try {
+    const response = await fetch(`${API_BASE}/deductions`);
+    const deductions = await response.json();
+
+    const tbody = document.getElementById('deductionsTableBody');
+    tbody.innerHTML = ''; // clear sample rows
+
+    deductions.forEach(item => {
+      const row = buildRow(item);
+      tbody.appendChild(row);
+    });
+
+    filterDeductions(); // update the record count
+  } catch (error) {
+    console.error('Failed to load deductions:', error);
+    document.getElementById('resultCount').textContent = 'Could not load data — is the server running?';
+  }
+}
+
+function buildRow(item) {
+  const row = document.createElement('tr');
+  row.setAttribute('data-id', item.id);
+  row.setAttribute('data-name', item.employee_name || item.employeeName);
+  row.setAttribute('data-type', item.type);
+  row.innerHTML = `
+    <td class="ps-4 fw-semibold">${item.employee_name || item.employeeName}</td>
+    <td>${item.type}</td>
+    <td class="amount-negative">-$${Number(item.amount).toFixed(2)}</td>
+    <td>${new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</td>
+    <td class="text-muted">${item.note || '—'}</td>
+    <td class="text-end pe-4">
+      <button class="icon-btn" title="Edit" onclick="editDeduction(this)"><i class="bi bi-pencil-fill"></i></button>
+      <button class="icon-btn" title="Delete" onclick="confirmDeleteDeduction(this)"><i class="bi bi-trash-fill" style="color:var(--danger);"></i></button>
+    </td>
+  `;
+  return row;
+}
+
+// ---------- SEARCH + FILTER (unchanged, works on whatever rows are in the table) ----------
 function filterDeductions() {
   const searchValue = document.getElementById('deductionSearch').value.toLowerCase();
   const typeValue = document.getElementById('typeFilter').value;
@@ -22,7 +63,6 @@ function filterDeductions() {
   rows.forEach(row => {
     const name = row.getAttribute('data-name').toLowerCase();
     const type = row.getAttribute('data-type');
-
     const matchesSearch = name.includes(searchValue);
     const matchesType = typeValue === '' || type === typeValue;
 
@@ -40,32 +80,30 @@ function filterDeductions() {
 
 // ---------- ADD ----------
 function openAddDeduction() {
-  editingRow = null;
+  editingDeductionId = null;
   deductionModalTitle.textContent = 'Add Deduction';
   deductionForm.reset();
-  clearValidation();
+  deductionForm.classList.remove('was-validated');
 }
 
 // ---------- EDIT ----------
 function editDeduction(button) {
   const row = button.closest('tr');
-  editingRow = row;
+  editingDeductionId = row.getAttribute('data-id');
 
   deductionModalTitle.textContent = 'Edit Deduction';
-  clearValidation();
+  deductionForm.classList.remove('was-validated');
 
   document.getElementById('deductionEmployee').value = row.children[0].textContent.trim();
   document.getElementById('deductionType').value = row.children[1].textContent.trim();
   document.getElementById('deductionAmount').value = row.children[2].textContent.replace(/[^0-9.]/g, '');
   document.getElementById('deductionNote').value = row.children[4].textContent.trim();
-  // Date input left blank for the user to re-pick, since the displayed format
-  // (e.g. "Jun 30, 2026") doesn't match the yyyy-mm-dd input format.
 
   deductionModal.show();
 }
 
-// ---------- SAVE (handles both add + edit) ----------
-deductionForm.addEventListener('submit', function (event) {
+// ---------- SAVE (add or edit — talks to the real backend now) ----------
+deductionForm.addEventListener('submit', async function (event) {
   event.preventDefault();
 
   if (!deductionForm.checkValidity()) {
@@ -74,63 +112,58 @@ deductionForm.addEventListener('submit', function (event) {
     return;
   }
 
-  const employee = document.getElementById('deductionEmployee').value;
-  const type = document.getElementById('deductionType').value;
-  const amount = parseFloat(document.getElementById('deductionAmount').value).toFixed(2);
-  const dateInput = document.getElementById('deductionDate').value;
-  const note = document.getElementById('deductionNote').value || '—';
+  const payload = {
+    employee_name: document.getElementById('deductionEmployee').value,
+    type: document.getElementById('deductionType').value,
+    amount: parseFloat(document.getElementById('deductionAmount').value),
+    date: document.getElementById('deductionDate').value,
+    note: document.getElementById('deductionNote').value || null
+  };
 
-  const formattedDate = dateInput
-    ? new Date(dateInput + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
-    : '—';
+  try {
+    let response;
+    if (editingDeductionId) {
+      response = await fetch(`${API_BASE}/deductions/${editingDeductionId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } else {
+      response = await fetch(`${API_BASE}/deductions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }
 
-  if (editingRow) {
-    // Update existing row
-    editingRow.setAttribute('data-name', employee);
-    editingRow.setAttribute('data-type', type);
-    editingRow.children[0].textContent = employee;
-    editingRow.children[1].textContent = type;
-    editingRow.children[2].textContent = `-$${amount}`;
-    editingRow.children[3].textContent = formattedDate;
-    editingRow.children[4].textContent = note;
-  } else {
-    // Add new row
-    const tbody = document.getElementById('deductionsTableBody');
-    const newRow = document.createElement('tr');
-    newRow.setAttribute('data-name', employee);
-    newRow.setAttribute('data-type', type);
-    newRow.innerHTML = `
-      <td class="ps-4 fw-semibold">${employee}</td>
-      <td>${type}</td>
-      <td class="amount-negative">-$${amount}</td>
-      <td>${formattedDate}</td>
-      <td class="text-muted">${note}</td>
-      <td class="text-end pe-4">
-        <button class="icon-btn" title="Edit" onclick="editDeduction(this)"><i class="bi bi-pencil-fill"></i></button>
-        <button class="icon-btn" title="Delete" onclick="confirmDeleteDeduction(this)"><i class="bi bi-trash-fill" style="color:var(--danger);"></i></button>
-      </td>
-    `;
-    tbody.appendChild(newRow);
+    if (!response.ok) throw new Error('Server returned an error');
+
+    await loadDeductions(); // refresh the table with real data
+    deductionModal.hide();
+    deductionForm.classList.remove('was-validated');
+  } catch (error) {
+    console.error('Failed to save deduction:', error);
+    alert('Could not save this deduction. Please check the server is running and try again.');
   }
-
-  filterDeductions(); // refresh count
-  deductionModal.hide();
-  deductionForm.classList.remove('was-validated');
 });
 
-function clearValidation() {
-  deductionForm.classList.remove('was-validated');
-}
-
-// ---------- DELETE (with confirmation) ----------
-function confirmDeleteDeduction(button) {
+// ---------- DELETE (with confirmation, now hits the real backend) ----------
+async function confirmDeleteDeduction(button) {
   const row = button.closest('tr');
+  const id = row.getAttribute('data-id');
   const name = row.getAttribute('data-name');
 
   const isConfirmed = window.confirm(`Are you sure you want to delete this deduction for ${name}? This cannot be undone.`);
+  if (!isConfirmed) return;
 
-  if (isConfirmed) {
+  try {
+    const response = await fetch(`${API_BASE}/deductions/${id}`, { method: 'DELETE' });
+    if (!response.ok) throw new Error('Server returned an error');
+
     row.remove();
-    filterDeductions(); // refresh count after removal
+    filterDeductions();
+  } catch (error) {
+    console.error('Failed to delete deduction:', error);
+    alert('Could not delete this deduction. Please check the server is running and try again.');
   }
 }

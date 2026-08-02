@@ -147,7 +147,7 @@
                   <th class="pe-4">Net Pay</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="summaryTableBody">
                 <tr><td class="ps-4 fw-semibold">John Doe</td><td>Operations</td><td class="mono">$1,350.00</td><td class="mono amount-negative">-$180.00</td><td class="pe-4 mono fw-semibold">$1,170.00</td></tr>
                 <tr><td class="ps-4 fw-semibold">Jane Doe</td><td>Finance</td><td class="mono">$1,505.00</td><td class="mono amount-negative">-$207.50</td><td class="pe-4 mono fw-semibold">$1,297.50</td></tr>
                 <tr><td class="ps-4 fw-semibold">John Smith</td><td>IT</td><td class="mono">$1,258.00</td><td class="mono amount-negative">-$185.00</td><td class="pe-4 mono fw-semibold">$1,073.00</td></tr>
@@ -181,7 +181,7 @@
                   <th class="pe-4">Total Amount</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="deductionsSummaryTableBody">
                 <tr><td class="ps-4 fw-semibold">Tax (PAYE)</td><td>5</td><td class="pe-4 mono amount-negative">-$613.00</td></tr>
                 <tr><td class="ps-4 fw-semibold">Pension</td><td>5</td><td class="pe-4 mono amount-negative">-$304.00</td></tr>
                 <tr><td class="ps-4 fw-semibold">Loan Repayment</td><td>1</td><td class="pe-4 mono amount-negative">-$200.00</td></tr>
@@ -213,7 +213,7 @@
                   <th class="pe-4">Status</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="overtimeSummaryTableBody">
                 <tr><td class="ps-4 fw-semibold">John Doe</td><td class="mono">4.0</td><td class="mono amount-positive">$50.00</td><td class="pe-4"><span class="badge-status badge-success">Approved</span></td></tr>
                 <tr><td class="ps-4 fw-semibold">Jane Doe</td><td class="mono">2.5</td><td class="mono amount-positive">$35.00</td><td class="pe-4"><span class="badge-status badge-success">Approved</span></td></tr>
                 <tr><td class="ps-4 fw-semibold">John Smith</td><td class="mono">6.0</td><td class="mono amount-positive">$78.00</td><td class="pe-4"><span class="badge-status badge-pending">Pending</span></td></tr>
@@ -231,11 +231,7 @@
           </div>
         </div>
 
-        <p class="content-note mt-4 no-print">
-          <i class="bi bi-info-circle"></i>
-          These 3 reports currently use sample data. Once Sammy shares the reporting/SQL query routes, each report will pull real aggregated data from the database instead.
-        </p>
-
+        
       </main>
     </div>
   </div>
